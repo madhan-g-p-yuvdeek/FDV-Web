@@ -7,10 +7,8 @@ import {
 } from '@material-ui/core/';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from '@material-ui/icons/Send';
-import { useQuill } from 'react-quilljs';
-import 'quill/dist/quill.snow.css';
 import { issueIdentifierList } from '../../../common/enums';
-
+import Onlyquill from './onlyQuill';
 
 const boxStyle = {
   padding: '10px',
@@ -38,25 +36,9 @@ const NewInquiry = ({ openModal, anchorEl, onClose }) => {
   const dispatch = useDispatch();
   const [initialClickSave, setInitialClickSave] = useState(false);
   const [inquiryData, setInquiryData] = useState(defaultInquiryData);
+  const [inquiryMessage,setInquiryMessage]=useState("")
   //const userProfile = useSelector((store) => store.user);
   //const lookupData = useSelector((store) => store.lookups);
-  //const { quill, quillRef } = useQuill();
-
-  
-
-  // useEffect(() => {
-  //   if (quill) {
-  //     quill.on('text-change', (delta, oldDelta, source) => {
-  //       // console.log(`getText=${quill.getText()}`); // Get text only
-  //       // console.log(`getContents =${quill.getContents()}`); // Get delta contents
-  //       // console.log(`quill.root -delta= ${quill.root.innerHTML}`); // Get innerHTML using quill
-  //       console.log(`quillRef= ${quillRef.current.firstChild.innerHTML}`); // Get innerHTML using quillRef
-  //       const og = { ...inquiryData };
-  //       og.message = { value: quill.root.innerHTML };
-  //       setInquiryData(og);
-  //     });
-  //   }
-  // }, [quill]);
 
   async function transferInquiryData(data) {
     await dispatch(setInquiry(data));
@@ -78,7 +60,8 @@ const NewInquiry = ({ openModal, anchorEl, onClose }) => {
  
 
   const handleClickSave = (e) => {
-    console.log(quillRef);
+    // console.log(quillRef);
+    console.log("HookOnSave====>",inquiryMessage)
     setInitialClickSave(true);
     if (validForm()) {
       const data = {
@@ -107,22 +90,11 @@ const NewInquiry = ({ openModal, anchorEl, onClose }) => {
     setInquiryData(defaultInquiryData);
     onClose();
   };
-
-  const Editor = () => {
-   const { quillRef } = useQuill();
-    if (quillRef.current) {
-      console.log(quillRef.current);
-      // need help how to get editorcontent  and do below steps to save data
-      //const og = { ...inquiryData };
-      // og.message = { value: quill.root.innerHTML };
-      // setInquiryData(og);
-    }
-    return (
-      <div style={{ width: 1000, height: 400 }} id="IdeaDetails">
-        <div ref={quillRef} />
-      </div>
-    );
-  };
+const handleQuillChange=(quillHtml)=>{
+  setInquiryMessage(quillHtml)
+        console.log("inquire=====>",quillHtml);
+        console.log("realHook====>",inquiryMessage);
+}
 
 
   return (
@@ -279,7 +251,7 @@ const NewInquiry = ({ openModal, anchorEl, onClose }) => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body1" color={(initialClickSave && inquiryData.message.value.length < 1) ? 'error' : 'textSecondary'}>Message *</Typography>
-            <Editor />
+            <Onlyquill sendOnChange={(quillHtml)=>handleQuillChange(quillHtml)}/>
             <br/>
             <br/>
             <br/>            

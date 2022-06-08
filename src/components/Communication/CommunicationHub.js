@@ -68,7 +68,7 @@ const CommunicationHub = () => {
           <Card raised>
             <CardContent>
               <Grid container>
-                <QuillEditor/> {' '}  {'    '}
+                {/* <QuillEditor/> {' '}  {'    '}
                 <Button
                       data-testid="CommunicationHub-NewInquiry-Button"
                       color="primary"
@@ -81,7 +81,7 @@ const CommunicationHub = () => {
         openModal={openNewMessage}
         anchorEl={anchorEl2}
         onClose={handleCloseNewMessage}
-      />
+      /> */}
                 <Grid item xs={6}>                  
                     <Button
                       data-testid="CommunicationHub-NewInquiry-Button"

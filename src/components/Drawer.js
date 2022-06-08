@@ -52,28 +52,28 @@ export default class MarerialUIDrawer
           open={isDrawerOpened}
           onClose={this.closeDrawer}
         >
-          <Link to='/CommunicationHub' style={styles.link}>
+          <Link to='/CommunicationHub' onClick={()=>this.closeDrawer()} style={styles.link}>
             <List>
               <ListItem button key='CommunicationHub'>               
                 <ListItemText primary='CommunicationHub' />
               </ListItem>
             </List>
           </Link>
-          <Link to='/Deviation' style={styles.link}>
+          <Link to='/Deviation' onClick={()=>this.closeDrawer()} style={styles.link}>
           <List>
             <ListItem button key='Deviation'>
               <ListItemText primary='Deviation' />
             </ListItem>
             </List>
           </Link>
-          <Link to='/CallsData' style={styles.link}>
+          <Link to='/CallsData' onClick={()=>this.closeDrawer()} style={styles.link}>
           <List>
             <ListItem button key='CallsData'>
               <ListItemText primary='CallsData' />
             </ListItem>
             </List>
           </Link>
-          <Link to='/messages' style={styles.link}>
+          <Link to='/messages' onClick={()=>this.closeDrawer()}style={styles.link}>
           <List>
             <ListItem button key='Messages'>
               <ListItemText primary='Messages' />
